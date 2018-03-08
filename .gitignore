@@ -1,5 +1,7 @@
 nbproject
 ccan/opt/.dirstamp
+compat/jansson-2.9/jansson_private_config.h.in
+compat/jansson-2.9/jansson_private_config.h
 compat/jansson-2.9/jansson.pc
 compat/jansson-2.9/libtool
 compat/jansson-2.9/ltmain.sh
@@ -37,6 +39,7 @@ minerd
 minerd.exe
 *.o
 *.bin
+*.lo
 
 autom4te.cache
 .deps

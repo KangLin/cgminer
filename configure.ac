@@ -440,6 +440,12 @@ if test "x$modminer" = xyes; then
 fi
 AM_CONDITIONAL([HAS_MODMINER], [test x$modminer = xyes])
 
+serial_fpga="no"
+AC_ARG_ENABLE([serial_fpga],
+	[AC_HELP_STRING([--enable-serial_fpga],[Compile support for serial fpga(default disabled)])],
+	[serial_fpga=$enableval]
+	)
+AM_CONDITIONAL([HAS_SERIAL_FPGA], [test x$serial_fpga = xyes])
 
 sp10="no"
 
@@ -524,7 +530,7 @@ else
 	want_crc16=false
 fi
 
-AM_CONDITIONAL([NEED_FPGAUTILS], [test x$modminer != xno])
+AM_CONDITIONAL([NEED_FPGAUTILS], [test x$modminer != xno -o x$serial_fpga = xyes])
 AM_CONDITIONAL([WANT_USBUTILS], [test x$want_usbutils != xfalse])
 AM_CONDITIONAL([WANT_LIBBITFURY], [test x$want_libbitfury != xfalse])
 AM_CONDITIONAL([HAVE_CURSES], [test x$curses = xyes])
@@ -879,8 +885,14 @@ else
 	echo "  ModMiner.FPGAs.......: Disabled"
 fi
 
+if test "x$serial_fpga" = xyes; then
+	echo "  Serial fpga .........: Enabled"
+else
+	echo "  Serail fpga .........: Disabled"
+fi
+
 #Add any new device to this, along with a no on the end of the test
-if test "x$avalon$avalon2$avalon4$avalon7$avalon_miner$bab$bflsc$bitforce$bitfury$bitfury16$blockerupter$hashfast$hashratio$icarus$klondike$knc$modminer$drillbit$minion$cointerra$bitmine_A1$ants1$ants2$ants3$sp10$sp30" = xnononononononononononononononononononononononononono; then
+if test "x$avalon$avalon2$avalon4$avalon7$avalon_miner$bab$bflsc$bitforce$bitfury$bitfury16$blockerupter$hashfast$hashratio$icarus$klondike$knc$modminer$drillbit$minion$cointerra$bitmine_A1$ants1$ants2$ants3$sp10$sp30$serial_fpga" = xnonononononononononononononononononononononononononono; then
 	echo
 	AC_MSG_ERROR([No mining devices configured in])
 	echo

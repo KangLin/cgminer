@@ -198,3 +198,7 @@ endif
 if HAS_BLOCKERUPTER
 cgminer_SOURCES += driver-blockerupter.c driver-blockerupter.h
 endif
+
+if HAS_SERIAL_FPGA
+cgminer_SOURCES += driver-serialfpga.c
+endif
